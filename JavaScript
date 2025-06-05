@@ -1,0 +1,26 @@
+const exchangeRates = {
+  USD: 1.0,
+  JPY: 113.5,
+  EUR: 0.89,
+  RUB: 74.36,
+  GBP: 0.75,
+  RWF: 9.86,
+  NRA: 1200,
+  SHL: 2900
+};
+
+document.getElementById("converter-form").addEventListener("submit", function (e) {
+  e.preventDefault();
+
+  const from = document.getElementById("from-currency").value;
+  const to = document.getElementById("to-currency").value;
+  const amount = parseFloat(document.getElementById("amount").value);
+
+  if (!isNaN(amount) && exchangeRates[from] && exchangeRates[to]) {
+    const converted = (amount * exchangeRates[to]) / exchangeRates[from];
+    document.getElementById("result").textContent =
+      `Converted Amount: ${converted.toFixed(2)} ${to}`;
+  } else {
+    document.getElementById("result").textContent = "Invalid input!";
+  }
+});
